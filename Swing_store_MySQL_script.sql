@@ -2,7 +2,7 @@ CREATE DATABASE CNPM_BanHang_Nhom11;
 USE CNPM_BanHang_Nhom11;
 
 
-CREATE TABLE Product(
+CREATE TABLE Products(
 	id INTEGER AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL UNIQUE,
     imageUrl VARCHAR(255) ,
@@ -13,7 +13,7 @@ CREATE TABLE Product(
     PRIMARY KEY(id)
 );
 
-CREATE TABLE Order(
+CREATE TABLE Orders(
     id INTEGER AUTO_INCREMENT,
     createAt DATETIME NOT NULL,
     numOfProducts INTEGER NOT NULL,
@@ -22,10 +22,10 @@ CREATE TABLE Order(
     description VARCHAR(255) NOT NULL,
     PRIMARY KEY(id)
 );
-CREATE TABLE Order_Detail(
+CREATE TABLE Orders_Detail(
                       id INTEGER AUTO_INCREMENT,
-                      productId INTEGER NOT NULL REFERENCES Product(id),
-                      orderId INTEGER NOT NULL REFERENCES Order(id),
+                      productId INTEGER NOT NULL REFERENCES Products(id),
+                      orderId INTEGER NOT NULL REFERENCES Orders(id),
                       numOfProducts INTEGER NOT NULL,
                       totalPrice FLOAT NOT NULL,
                       status INTEGER NOT NULL,
