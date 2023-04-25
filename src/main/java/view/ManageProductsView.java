@@ -19,11 +19,11 @@ import model.dao.ProductDAO;
 
 public class ManageProductsView extends JFrame implements ActionListener {
     private final JPanel bottomPanel, inputsPanel, tablePanel;
-    private final JLabel idLabel, nameLabel,  priceLabel, categoryLabel,instructionLabel;
+    private final JLabel idLabel, nameLabel,  priceLabel, categoryLabel;
     private final JLabel imageLabel,statusLabel,descriptionLabel;
     private final JTextField idTextField, nameTextField, priceTextField,imageTextField,statusTextField,descriptionTextField;
     private final JComboBox<String> categoryComboBox;
-    private final JButton backButton, createProductButton, updateProductButton, deleteProductButton;
+    private final JButton backButton, createProductButton;
     private final Dimension labelDimension = new Dimension(85, 20), inputBoxDimension = new Dimension(180, 20),
             inputPanelDimension = new Dimension((int)(labelDimension.getWidth() + inputBoxDimension.getWidth()) + 20, 0),
             tableDimension = new Dimension(690, 600), buttonsDimension = new Dimension(105, 25);
@@ -101,17 +101,17 @@ public class ManageProductsView extends JFrame implements ActionListener {
         setButtonDesign(createProductButton);
         inputsPanel.add(createProductButton);
 
-        updateProductButton = new JButton("Update Product");
-        setButtonDesign(updateProductButton);
-        inputsPanel.add(updateProductButton);
+//        updateProductButton = new JButton("Update Product");
+//        setButtonDesign(updateProductButton);
+//        inputsPanel.add(updateProductButton);
 
-        instructionLabel = new JLabel("Select from table to delete");
-        instructionLabel.setFont(new Font("Calibri", Font.BOLD, 10));
-        inputsPanel.add(instructionLabel);
+//        instructionLabel = new JLabel("Select from table to delete");
+//        instructionLabel.setFont(new Font("Calibri", Font.BOLD, 10));
+//        inputsPanel.add(instructionLabel);
 
-        deleteProductButton = new JButton("Delete Product");
-        setButtonDesign(deleteProductButton);
-        inputsPanel.add(deleteProductButton);
+//        deleteProductButton = new JButton("Delete Product");
+//        setButtonDesign(deleteProductButton);
+//        inputsPanel.add(deleteProductButton);
 
         /***************************** Buttons *****************************/
         /****************************** Table ******************************/
@@ -201,6 +201,9 @@ public class ManageProductsView extends JFrame implements ActionListener {
         idTextField.requestFocus();
         nameTextField.setText(null);
         priceTextField.setText(null);
+        imageTextField.setText(null);
+        statusTextField.setText(null);
+        descriptionTextField.setText(null);
         categoryComboBox.setSelectedIndex(0);
     }
 
@@ -235,23 +238,24 @@ public class ManageProductsView extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        Product product = new Product(
-                idTextField.getText().isBlank() ? new Random().nextInt(15,30) : Integer.parseInt(idTextField.getText()),
-                nameTextField.getText(),
-                imageTextField.getText(),
-                Float.parseFloat(priceTextField.getText()),
-                (String) categoryComboBox.getSelectedItem(),
-                 Integer.parseInt(statusTextField.getText()),
-                descriptionTextField.getText());
+
 
         if (event.getSource().equals(createProductButton)) {
+            Product product = new Product(
+                    idTextField.getText().isBlank() ? new Random().nextInt(15,30) : Integer.parseInt(idTextField.getText()),
+                    nameTextField.getText(),
+                    imageTextField.getText(),
+                    Float.parseFloat(priceTextField.getText()),
+                    (String) categoryComboBox.getSelectedItem(),
+                    Integer.parseInt(statusTextField.getText()),
+                    descriptionTextField.getText());
             dbCreateProduct(product);
         }
 
         else if (event.getSource().equals(backButton)) {
             try {
                 productDAO.close();
-//                new MenuFrame();
+                new MenuFrame();
             } catch (Exception exception) {
                 exception.printStackTrace();
             }

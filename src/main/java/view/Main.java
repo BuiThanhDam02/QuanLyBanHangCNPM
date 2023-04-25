@@ -5,7 +5,9 @@ import java.sql.SQLException;
 public class Main {
     public static void main(String[] args) {
         try {
-            new ManageProductsView();
+             new MenuFrame();
+//					frame.setVisible(true);
+
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
