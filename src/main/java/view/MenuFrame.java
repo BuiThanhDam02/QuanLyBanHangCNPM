@@ -14,8 +14,11 @@ import java.util.HashMap;
 import javax.swing.*;
 
 
+// Use Case Thêm món ăn (20130217-Bùi Thanh Đảm)
+// Bước 1.1 : Khi chạy chương trình nhân viên đã ở trang màn hình chính
 
-
+// Use Case Xóa món ăn (20130217-Bùi Thanh Đảm)
+// Bước 2.1 : Khi chạy chương trình nhân viên đã ở trang màn hình chính
 public class MenuFrame extends JFrame implements ActionListener {
     private final JPanel mainPanel, logoPanel;
     private final JLabel  helloLabel, logoLabel;
@@ -82,15 +85,15 @@ public class MenuFrame extends JFrame implements ActionListener {
         /*************************************** Logo ****************************************/
         /************************************* Buttons **************************************/
 
-        newSaleButton = new JButton("New sale");
+        newSaleButton = new JButton("Bán hàng");
         setLineDesign(newSaleIcon, newSaleButton);
 
-        searchSaleButton = new JButton("Search sale");
+        searchSaleButton = new JButton("Quản lý đơn hàng");
         setLineDesign(searchSaleIcon, searchSaleButton);
 
 
 
-        manageProductsButton = new JButton("Manage products");
+        manageProductsButton = new JButton("Quản lý món ăn");
         setLineDesign(manageProductsIcon, manageProductsButton);
 
         settingsButton = new JButton("Settings");
@@ -139,7 +142,11 @@ public class MenuFrame extends JFrame implements ActionListener {
 //                new SearchSaleFrame();
                 this.dispose();
             } else if (event.getSource().equals(manageProductsButton)) {
+// Use Case Thêm món ăn (20130217-Bùi Thanh Đảm)
+// Bước 1.2 : Khi nhân viên nhấn vào nút Quản lý món ăn sẽ được đưa tới trang Trang quản lý món ăn
 
+// Use Case Xóa món ăn (20130217-Bùi Thanh Đảm)
+// Bước 2.2 : Khi nhân viên nhấn vào nút Quản lý món ăn sẽ được đưa tới trang Trang quản lý món ăn
                     new ManageProductsView();
                     this.dispose();
 

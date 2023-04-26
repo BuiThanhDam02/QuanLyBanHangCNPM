@@ -5,7 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import model.MySQLConnector;
-import model.OrderDetail;
+
+import model.OrdersDetail;
 
 public class OrderDetailDAO {
 	private final Connection connection;
@@ -21,7 +22,7 @@ public class OrderDetailDAO {
         Tao orderDetail
     */
 
-	public boolean createOrderDetail(OrderDetail orderDetail) throws SQLException {
+	public boolean createOrderDetail(OrdersDetail orderDetail) throws SQLException {
 		query = "INSERT INTO Orders_Detail(productId,orderId,numOfProducts,totalPrice,status) VALUES( ?, ?,?,?,?)";
 		statement = connection.prepareStatement(query);
 		statement.setInt(1, orderDetail.getProductId());

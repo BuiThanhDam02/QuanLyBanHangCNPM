@@ -4,10 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import com.mysql.cj.x.protobuf.MysqlxCrud.Order;
-
 import model.MySQLConnector;
-import model.Orders;
+import model.Order;
 
 public class OrderDAO {
 	  	private final Connection connection;
@@ -22,7 +20,7 @@ public class OrderDAO {
 	     * Nguoi thuc hien : Bao
 	     * Them order vao database
 	     */
-	    public boolean createOrder(Orders orders) throws SQLException {
+	    public boolean createOrder(Order orders) throws SQLException {
 	    	 query = "INSERT INTO Orders VALUES(?, ?, ?, ?,?,?)";
 	    	 statement = connection.prepareStatement(query);
 	         statement.setInt(1, orders.getId());

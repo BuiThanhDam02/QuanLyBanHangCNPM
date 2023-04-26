@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.*;
 import java.sql.SQLException;
 
 public class Main {

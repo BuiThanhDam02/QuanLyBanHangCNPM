@@ -4,8 +4,8 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import model.OrderDetail;
-import model.Orders;
+
+import model.Order;
 import model.OrdersDetail;
 import model.dao.OrderDAO;
 import model.dao.OrderDetailDAO;
@@ -22,7 +22,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.StringTokenizer;
 
 public class MainSellView extends JFrame implements ActionListener {
 
@@ -216,7 +215,7 @@ public class MainSellView extends JFrame implements ActionListener {
 						System.out.println(value);
 						long millis = System.currentTimeMillis(); 
 						Date date = new Date(millis);
-						Orders order = new Orders(value, date ,totalProduct, totalPrice, 0, "accepted");
+						Order order = new Order(value, date ,totalProduct, totalPrice, 0, "accepted");
 						addOrder(order);
 						addDetaiOrder(list, value);
 						clearChoseProduct();
@@ -295,13 +294,13 @@ public class MainSellView extends JFrame implements ActionListener {
 			String productId = tk[0];
 			Float totalPrice = Float.parseFloat(tk[4]);
 			int qty = Integer.parseInt(tk[3]);
-			OrderDetail detail = new OrderDetail(0, Integer.parseInt(productId), orderID, qty, totalPrice, 0);
+			OrdersDetail detail = new OrdersDetail(0, Integer.parseInt(productId), orderID, qty, totalPrice, 0);
 			orderDetailDAO.createOrderDetail(detail);
 		}
 		
 	}
 	//add order
-	public void addOrder(Orders order) throws SQLException {
+	public void addOrder(Order order) throws SQLException {
 		orderDAO.createOrder(order);
 	}
 	

@@ -19,11 +19,11 @@ import model.dao.ProductDAO;
 
 public class ManageProductsView extends JFrame implements ActionListener {
     private final JPanel bottomPanel, inputsPanel, tablePanel;
-    private final JLabel idLabel, nameLabel,  priceLabel, categoryLabel;
+    private final JLabel idLabel, nameLabel,  priceLabel, categoryLabel,instructionLabel;
     private final JLabel imageLabel,statusLabel,descriptionLabel;
     private final JTextField idTextField, nameTextField, priceTextField,imageTextField,statusTextField,descriptionTextField;
     private final JComboBox<String> categoryComboBox;
-    private final JButton backButton, createProductButton;
+    private final JButton backButton, createProductButton,deleteProductButton;
     private final Dimension labelDimension = new Dimension(85, 20), inputBoxDimension = new Dimension(180, 20),
             inputPanelDimension = new Dimension((int)(labelDimension.getWidth() + inputBoxDimension.getWidth()) + 20, 0),
             tableDimension = new Dimension(690, 600), buttonsDimension = new Dimension(105, 25);
@@ -105,13 +105,13 @@ public class ManageProductsView extends JFrame implements ActionListener {
 //        setButtonDesign(updateProductButton);
 //        inputsPanel.add(updateProductButton);
 
-//        instructionLabel = new JLabel("Select from table to delete");
-//        instructionLabel.setFont(new Font("Calibri", Font.BOLD, 10));
-//        inputsPanel.add(instructionLabel);
+        instructionLabel = new JLabel("Select from table to delete");
+        instructionLabel.setFont(new Font("Calibri", Font.BOLD, 10));
+        inputsPanel.add(instructionLabel);
 
-//        deleteProductButton = new JButton("Delete Product");
-//        setButtonDesign(deleteProductButton);
-//        inputsPanel.add(deleteProductButton);
+        deleteProductButton = new JButton("Delete Product");
+        setButtonDesign(deleteProductButton);
+        inputsPanel.add(deleteProductButton);
 
         /***************************** Buttons *****************************/
         /****************************** Table ******************************/
@@ -127,17 +127,6 @@ public class ManageProductsView extends JFrame implements ActionListener {
             }
         };
 
-//        productDataTable.addMouseListener(new MouseAdapter(){
-//            @Override
-//            public void mouseClicked(MouseEvent event){
-//                if (event.getClickCount() == 2 && event.getButton() == MouseEvent.BUTTON1){
-//                    idTextField.setText((String) productData[productDataTable.getSelectedRow()][0]);
-//                    nameTextField.setText((String) productData[productDataTable.getSelectedRow()][1]);
-//                    categoryComboBox.setSelectedItem(productData[productDataTable.getSelectedRow()][2]);
-//                    priceTextField.setText((String) productData[productDataTable.getSelectedRow()][3]);
-//                }
-//            }
-//        });
 
         scrollPane = new JScrollPane(productDataTable);
         scrollPane.setPreferredSize(tableDimension);
@@ -219,8 +208,12 @@ public class ManageProductsView extends JFrame implements ActionListener {
                     "Input error", JOptionPane.WARNING_MESSAGE);
         } else {
             try {
+                // Use Case Thêm món ăn (20130217-Bùi Thanh Đảm)
+                // Bước 1.4 : Hệ thông ghi nhận món ăn vào ProductDAO
                 if (productDAO.createProduct(product)){
                     productData = productDAO.readProductsTableData();
+                    // Use Case Thêm món ăn (20130217-Bùi Thanh Đảm)
+                    // Bước 1.6 : Hệ thông phản hồi thêm món ăn thành công
                     JOptionPane.showMessageDialog(null, "This product has been created successfully!",
                             "Product created", JOptionPane.INFORMATION_MESSAGE);
                     emptyBoxes();
@@ -234,12 +227,48 @@ public class ManageProductsView extends JFrame implements ActionListener {
         }
     }
 
+    private void dbDeleteProduct() {
 
+        if (productDataTable.getSelectionModel().isSelectionEmpty()) {
+            JOptionPane.showMessageDialog(null, "You must pick a line from the table!",
+                    "Delete error", JOptionPane.WARNING_MESSAGE);
+        } else {
+            // Use Case Xóa món ăn (20130217-Bùi Thanh Đảm)
+            // Bước 2.5 : Hệ thống hiển thị hộp thoại xác nhận
+            String[] options = {"Yes", "No"};
+            int option = JOptionPane.showOptionDialog(null, "Are you sure you want to delete this product?", "Delete product",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+            // Use Case Xóa món ăn (20130217-Bùi Thanh Đảm)
+            // Bước 2.6 : Nhân viên chọn vào nút có để xóa
+            if (option == 0) {
+                try {
+                    // Use Case Xóa món ăn (20130217-Bùi Thanh Đảm)
+                    // Bước 2.7 : Hệ thống xác thực thông tin món ăn bị xóa
+
+                    int selectedProduct = Integer.parseInt((String) productData[productDataTable.getSelectedRow()][0]);
+                    if (productDAO.deleteProduct(selectedProduct)) {
+                        productData = productDAO.readProductsTableData();
+                        // Use Case Xóa món ăn (20130217-Bùi Thanh Đảm)
+                        // Bước 2.9 : Hệ thống phản hồi thông tin xóa thành công
+                        JOptionPane.showMessageDialog(null, "This product has been deleted successfully!",
+                                "Product deleted", JOptionPane.INFORMATION_MESSAGE);
+                        emptyBoxes();
+                        updateTable();
+                    }
+                } catch (SQLException sqlException) {
+                    sqlException.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Someting went wrong!",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+    }
 
     @Override
     public void actionPerformed(ActionEvent event) {
 
-
+        // Use Case Thêm món ăn (20130217-Bùi Thanh Đảm)
+        // Bước 1.3 : Khi nhân viên nhấn vào nút Thêm món ăn thông tin trong các input sẽ được tạo
         if (event.getSource().equals(createProductButton)) {
             Product product = new Product(
                     idTextField.getText().isBlank() ? new Random().nextInt(15,30) : Integer.parseInt(idTextField.getText()),
@@ -251,7 +280,14 @@ public class ManageProductsView extends JFrame implements ActionListener {
                     descriptionTextField.getText());
             dbCreateProduct(product);
         }
+        // Use Case Xóa món ăn (20130217-Bùi Thanh Đảm)
+        // Bước 2.3 : Nhân viên chọn vào món ăn cần chọn
 
+        else if (event.getSource().equals(deleteProductButton)) {
+            // Use Case Xóa món ăn (20130217-Bùi Thanh Đảm)
+            // Bước 2.4 : Nhân viên chọn vào nút xóa món ăn
+            dbDeleteProduct();
+        }
         else if (event.getSource().equals(backButton)) {
             try {
                 productDAO.close();
