@@ -34,6 +34,17 @@ public class OrderDetailDAO {
 		return (insertedLines != 0);
 
 	}
+	/*
+	 * Nguoi thuc hien: Luan
+	 * them deleteOrderDetail
+	 */
+	public boolean deleteOrderDetail(int orderDetailId) throws SQLException {
+		query = "DELETE FROM Orders_Detail WHERE id=?";
+		statement = connection.prepareStatement(query);
+		statement.setInt(1, orderDetailId);
+		int deletedLines = statement.executeUpdate();
+		return (deletedLines != 0);
+	}
        public void close() throws SQLException {
         connection.close();
     }
