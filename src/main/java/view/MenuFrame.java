@@ -139,7 +139,7 @@ public class MenuFrame extends JFrame implements ActionListener {
                 frame.setVisible(true);
                 this.dispose();
             } else if (event.getSource().equals(searchSaleButton)) {
-//                new SearchSaleFrame();
+                new ManageOrderView();
                 this.dispose();
             } else if (event.getSource().equals(manageProductsButton)) {
 // Use Case Thêm món ăn (20130217-Bùi Thanh Đảm)
