@@ -55,7 +55,7 @@ public class MainSellView extends JFrame implements ActionListener {
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.LIGHT_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setTitle("Pháº§n Má»�m Há»— Trá»£ BĂ¡n HĂ ng");
+		setTitle("Sale");
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
@@ -78,7 +78,7 @@ public class MainSellView extends JFrame implements ActionListener {
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 
-		String column[] = { "ID", "NAME", "Image", "Price", "Category", "Status", "Description" };
+		String column[] = { "Id", "Name", "Image", "Price", "Category", "Status", "Description" };
 		String[][] productData = productDAO.readProductsTableData();
 		table = new JTable(productData, column);
 		table.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -93,7 +93,7 @@ public class MainSellView extends JFrame implements ActionListener {
 					try {
 						int qty = Integer.parseInt(t);
 						if (qty < 0) {
-							JOptionPane.showMessageDialog(panel_1, "So luong san pham lon hon 0!");
+							JOptionPane.showMessageDialog(panel_1, "Number of products must be greater than 0!");
 						} else {
 							String id = productData[table.getSelectedRow()][0];
 							String name = productData[table.getSelectedRow()][1];
@@ -109,7 +109,7 @@ public class MainSellView extends JFrame implements ActionListener {
 						dataDetailOrder = choseProductToOrder(list);
 						updateTable();
 					} catch (NumberFormatException e) {
-						JOptionPane.showMessageDialog(panel_1, "So luong san pham phai la chu so!");
+						JOptionPane.showMessageDialog(panel_1, "Product quantity must be in digits!");
 					}
 				}
 			}
@@ -187,7 +187,7 @@ public class MainSellView extends JFrame implements ActionListener {
 		contentPane.add(panel_4);
 		panel_4.setLayout(null);
 
-		confirmButton = new JButton("Xác nhận thanh toán");
+		confirmButton = new JButton("Create Order");
 		confirmButton.setBackground(Color.WHITE);
 		confirmButton.setForeground(Color.BLUE);
 		confirmButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -207,18 +207,18 @@ public class MainSellView extends JFrame implements ActionListener {
 						addOrder(order);
 						addDetaiOrder(list, value);
 						clearChoseProduct();
-						JOptionPane.showMessageDialog(panel_1, "Xuat hoa don thanh cong");
+						JOptionPane.showMessageDialog(panel_1, "Create order successfully");
 					} catch (Exception e2) {
 						e2.getStackTrace();
 					}
 				} else {
-					JOptionPane.showMessageDialog(panel_1, "Chua co san pham nao!");
+					JOptionPane.showMessageDialog(panel_1, "No products selected!");
 				}
 			}
 		});
 		panel_4.add(confirmButton);
 
-		cancelButton = new JButton("Hủy");
+		cancelButton = new JButton("Cancel");
 		cancelButton.setForeground(Color.RED);
 		cancelButton.setBackground(Color.WHITE);
 		cancelButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -231,27 +231,27 @@ public class MainSellView extends JFrame implements ActionListener {
 			}
 		});
 		panel_4.add(cancelButton);
-
-		delButton = new JButton("Xoá");
-		delButton.setForeground(Color.RED);
-		delButton.setBackground(Color.WHITE);
-		delButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		delButton.setBounds(10, 88, 289, 52);
-
-		delButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String idOrdrerText = JOptionPane.showInputDialog(null, "Nhập id của đơn hàng cần xoá: ");
-				int idOrdrer = Integer.parseInt(idOrdrerText);
-				try {
-					delOrder(idOrdrer);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				;
-			}
-		});
-		panel_4.add(delButton);
+//
+//		delButton = new JButton("Xoá");
+//		delButton.setForeground(Color.RED);
+//		delButton.setBackground(Color.WHITE);
+//		delButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+//		delButton.setBounds(10, 88, 289, 52);
+//
+//		delButton.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				String idOrdrerText = JOptionPane.showInputDialog(null, "Nhập id của đơn hàng cần xoá: ");
+//				int idOrdrer = Integer.parseInt(idOrdrerText);
+//				try {
+//					delOrder(idOrdrer);
+//				} catch (SQLException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				}
+//				;
+//			}
+//		});
+//		panel_4.add(delButton);
 
 	}
 

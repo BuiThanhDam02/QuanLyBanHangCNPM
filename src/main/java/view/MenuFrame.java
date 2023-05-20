@@ -14,11 +14,11 @@ import java.util.HashMap;
 import javax.swing.*;
 
 
-// Use Case Thêm món ăn (20130217-Bùi Thanh Đảm)
-// Bước 1.1 : Khi chạy chương trình nhân viên đã ở trang màn hình chính
+// Use Case ThĂªm mĂ³n Äƒn (20130217-BĂ¹i Thanh Ä�áº£m)
+// BÆ°á»›c 1.1 : Khi cháº¡y chÆ°Æ¡ng trĂ¬nh nhĂ¢n viĂªn Ä‘Ă£ á»Ÿ trang mĂ n hĂ¬nh chĂ­nh
 
-// Use Case Xóa món ăn (20130217-Bùi Thanh Đảm)
-// Bước 2.1 : Khi chạy chương trình nhân viên đã ở trang màn hình chính
+// Use Case XĂ³a mĂ³n Äƒn (20130217-BĂ¹i Thanh Ä�áº£m)
+// BÆ°á»›c 2.1 : Khi cháº¡y chÆ°Æ¡ng trĂ¬nh nhĂ¢n viĂªn Ä‘Ă£ á»Ÿ trang mĂ n hĂ¬nh chĂ­nh
 public class MenuFrame extends JFrame implements ActionListener {
     private final JPanel mainPanel, logoPanel;
     private final JLabel  helloLabel, logoLabel;
@@ -70,7 +70,7 @@ public class MenuFrame extends JFrame implements ActionListener {
 
 
 
-        helloLabel = new JLabel("Xin chào, người bán" , SwingConstants.CENTER);
+        helloLabel = new JLabel("Hello!" , SwingConstants.CENTER);
         helloLabel.setPreferredSize(helloDimension);
         helloLabel.setFont(new Font("Calibri", Font.BOLD, 13));
         mainPanel.add(helloLabel);
@@ -85,15 +85,15 @@ public class MenuFrame extends JFrame implements ActionListener {
         /*************************************** Logo ****************************************/
         /************************************* Buttons **************************************/
 
-        newSaleButton = new JButton("Bán hàng");
+        newSaleButton = new JButton("Sale");
         setLineDesign(newSaleIcon, newSaleButton);
 
-        searchSaleButton = new JButton("Quản lý đơn hàng");
+        searchSaleButton = new JButton("Order Management");
         setLineDesign(searchSaleIcon, searchSaleButton);
 
 
 
-        manageProductsButton = new JButton("Quản lý món ăn");
+        manageProductsButton = new JButton("Product Management");
         setLineDesign(manageProductsIcon, manageProductsButton);
 
         settingsButton = new JButton("Settings");
@@ -142,11 +142,11 @@ public class MenuFrame extends JFrame implements ActionListener {
                 new ManageOrderView();
                 this.dispose();
             } else if (event.getSource().equals(manageProductsButton)) {
-// Use Case Thêm món ăn (20130217-Bùi Thanh Đảm)
-// Bước 1.2 : Khi nhân viên nhấn vào nút Quản lý món ăn sẽ được đưa tới trang Trang quản lý món ăn
+// Use Case ThĂªm mĂ³n Äƒn (20130217-BĂ¹i Thanh Ä�áº£m)
+// BÆ°á»›c 1.2 : Khi nhĂ¢n viĂªn nháº¥n vĂ o nĂºt Quáº£n lĂ½ mĂ³n Äƒn sáº½ Ä‘Æ°á»£c Ä‘Æ°a tá»›i trang Trang quáº£n lĂ½ mĂ³n Äƒn
 
-// Use Case Xóa món ăn (20130217-Bùi Thanh Đảm)
-// Bước 2.2 : Khi nhân viên nhấn vào nút Quản lý món ăn sẽ được đưa tới trang Trang quản lý món ăn
+// Use Case XĂ³a mĂ³n Äƒn (20130217-BĂ¹i Thanh Ä�áº£m)
+// BÆ°á»›c 2.2 : Khi nhĂ¢n viĂªn nháº¥n vĂ o nĂºt Quáº£n lĂ½ mĂ³n Äƒn sáº½ Ä‘Æ°á»£c Ä‘Æ°a tá»›i trang Trang quáº£n lĂ½ mĂ³n Äƒn
                     new ManageProductsView();
                     this.dispose();
 
