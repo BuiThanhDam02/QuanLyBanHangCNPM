@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import model.MySQLConnector;
+import DB.MySQLConnector;
 
 import model.OrdersDetail;
 
@@ -15,7 +15,7 @@ public class OrderDetailDAO {
 	private int insertedLines = 0;
 
 	public OrderDetailDAO() throws SQLException {
-		connection = MySQLConnector.getConnection();
+		connection = MySQLConnector.getConnection(true);
 	}
     /*
         Nguoi thuc hien Bao

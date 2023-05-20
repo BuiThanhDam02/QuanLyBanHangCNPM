@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import model.MySQLConnector;
+import DB.MySQLConnector;
 import model.Product;
 
 // Người thực hiện ProductDao Bùi Thanh Đảm - 20130217
@@ -20,7 +20,7 @@ public class ProductDAO {
     private int insertedLines = 0;
 
     public ProductDAO() throws SQLException {
-        connection = MySQLConnector.getConnection();
+        connection = MySQLConnector.getConnection(true);
     }
 
 
